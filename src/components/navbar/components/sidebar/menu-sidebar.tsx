@@ -19,7 +19,7 @@ const router = useRouter()
       </ListItemButton>
       <ListItemButton
         onClick={() =>
-          router.push('/doguinho')
+          router.push('/comidas')
         }
       >
         <ListItemText>
