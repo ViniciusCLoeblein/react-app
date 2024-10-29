@@ -2,7 +2,6 @@ import React from 'react'
 import ContaUsuarioComponent from './usuario'
 import { Box, Badge, AppBar, Toolbar, IconButton } from '@mui/material'
 import { AccountCircle, Menu, Notifications } from '@mui/icons-material'
-import { useRouter } from 'next/navigation'
 
 export interface NavbarComponentProps {
   open: boolean
@@ -10,7 +9,6 @@ export interface NavbarComponentProps {
 }
 
 const NavbarComponent = ({ open, setOpen }: NavbarComponentProps) => {
-  const router = useRouter();
   const [anchorConta, setAnchorConta] = React.useState<null | HTMLElement>(null)
 
 
@@ -35,10 +33,9 @@ const NavbarComponent = ({ open, setOpen }: NavbarComponentProps) => {
           </IconButton>
           <button
             id="navbar-logo"
-            onClick={() => router.push('/')}
-            className="w-32 h-14 "
+            className="w-32 h-14 flex justify-center text-center"
           >
-             <p className='font-bold text-2xl'>UPF</p>
+             <p className='font-bold text-2xl flex justify-center text-center'>UPF</p>
           </button>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton
