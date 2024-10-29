@@ -1,101 +1,164 @@
-import Image from "next/image";
+"use client";
+import Image from 'next/image'
+import logo from '../assets/logo.png'
+import Input from '@/components/inputs'
+import { setCookie } from 'cookies-next'
+import { useRouter } from 'next/navigation';
+import { useForm } from '@tanstack/react-form'
+import { Button, InputAdornment } from '@mui/material'
+import { zodValidator } from '@tanstack/zod-form-adapter'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 
-export default function Home() {
+
+const Acessar: React.FC = () => {
+  const router = useRouter();
+  const [showPswd, setShowPswd] = useState(false)
+  const [checked, setChecked] = useState(false)
+  const [valor, setValor] = useState({ password: '', username: '' })
+
+  const form = useForm({
+    defaultValues: valor,
+    validatorAdapter: zodValidator(),
+    onSubmit: handleNavigation,
+  });
+  
+
+  const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked)
+  }
+
+  function handleNavigation() {
+    setCookie('LOGIN_INFO',valor)
+    router.push('/home');
+  }
+  
+
+  useEffect(() => {
+    localStorage.setItem('isChecked', String(checked))
+  }, [checked])
+
+  useEffect(() => {
+    const unsubscribe = form.store.subscribe(() => {
+      setValor(form.store.state.values)
+    })
+    return () => unsubscribe()
+  }, [form.store, form.store.state.values])
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      form.handleSubmit()
+    },
+    [form],
+  )
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="min-h-screen h-screen flex flex-col items-center justify-center bg-gradient-to-r from-emerald-700 to-emerald-700 py-12 px-4 sm:px-6 lg:px-8 relative">
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <div className="animate-background-lines w-full h-full absolute transform -skew-y-[20deg] opacity-20 bg-gradient-to-r from-white to-transparent" />
+      </div>
+      <div className="text-center flex flex-col items-center pb-8 z-10">
+        <Image src={logo} alt="grazziotin" width={200} height={200} priority />
+      </div>
+      <div className="max-w-md w-full bg-white bg-opacity-90 p-10 rounded-lg shadow-2xl space-y-8 z-10 backdrop-blur-lg">
+        <h2 className="text-2xl font-extrabold text-center w-full text-emerald-700">
+          Iniciar sessão
+        </h2>
+        <p className="text-sm text-black">
+          Bem-vindo! <br />
+          Entre com suas credenciais para acessar sua conta.
+        </p>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <form.Field name="username">
+            {(v) => (
+              <Input
+                required
+                size="small"
+                type="number"
+                label="Usuário"
+                autoComplete="new-username"
+                value={v.state.value}
+                sx={{ width: '100%' }}
+                placeholder="Informe seu código"
+                onChange={(e) => v.handleChange(e.target.value.slice(0, 6))}
+              />
+            )}
+          </form.Field>
+          <form.Field name="password">
+            {(v) => (
+              <Input
+                required
+                size="small"
+                label="Senha"
+                autoComplete="new-password"
+                value={v.state.value}
+                sx={{ width: '100%' }}
+                placeholder="Informe sua senha"
+                type={showPswd ? 'text' : 'password'}
+                onChange={(e) => v.handleChange(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      className="cursor-pointer"
+                      position="end"
+                      onClick={() => setShowPswd(!showPswd)}
+                    >
+                      {showPswd ? (
+                        <Visibility fontSize={'small'} className="text-emerald-700" />
+                      ) : (
+                        <VisibilityOff fontSize={'small'} className="text-emerald-700" />
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          </form.Field>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                checked={checked}
+                onChange={handleCheckbox}
+                className="h-4 w-4 !text-emerald-700 border-gray-300 rounded"
+              />
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-black"
+              >
+                Me manter conectado
+              </label>
+            </div>
+            <div className="text-sm">
+              <button
+                type="reset"
+                className="font-medium text-emerald-700 hover:text-bemerald-600"
+              >
+                Esqueceu sua senha?
+              </button>
+            </div>
+          </div>
+          <div>
+            <Button
+              className="!bg-emerald-700 w-full !text-white"
+              type="submit"
+            >
+              entrar
+            </Button>
+          </div>
+        </form>
+        <span className="flex text-sm content-center text-center h-5">
+          <p className="text-gray-600 pr-2">Precisa de ajuda?</p>
+          <p className="font-medium text-emerald-700 hover:text-emerald-600">
+            Entre em contato com o suporte
+          </p>
+        </span>
+      </div>
     </div>
-  );
+  )
 }
+
+export default memo(Acessar)
