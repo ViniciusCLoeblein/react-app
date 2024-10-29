@@ -1,22 +1,29 @@
 import React, { memo } from "react"
-import { List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { useRouter } from "next/navigation"
+import { List, ListItemButton, ListItemText } from "@mui/material"
 
 
 const MenuSidebar:React.FC = () => {
+const router = useRouter()
+
   return (
     <List component="div" className="!bg-grzsecondary" disablePadding>
       <ListItemButton
-        sx={{ pl: 4 }}
-        key={''}
-        onClick={() => {}
-          // navigate(v.codLinkAplicacao)
+        onClick={() =>
+          router.push('/doguinho')
         }
       >
-        <ListItemIcon className="!text-white">
-          <i className="material-icons"></i>
-        </ListItemIcon>
         <ListItemText>
-          <p className="text-[13.5px] text-white">AAAAAAAAAAA</p>
+          <p className="text-[13.5px] text-white">Imagem doguinho</p>
+        </ListItemText>
+      </ListItemButton>
+      <ListItemButton
+        onClick={() =>
+          router.push('/doguinho')
+        }
+      >
+        <ListItemText>
+          <p className="text-[13.5px] text-white">Comidas</p>
         </ListItemText>
       </ListItemButton>
     </List>

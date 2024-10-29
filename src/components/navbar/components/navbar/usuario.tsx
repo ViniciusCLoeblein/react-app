@@ -1,8 +1,8 @@
 import React from 'react'
 import Menu from '@mui/material/Menu'
-import { deleteCookie, getCookie } from 'cookies-next'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
+import { deleteCookie } from 'cookies-next'
 import {Logout } from '@mui/icons-material'
 import MenuItem from '@mui/material/MenuItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
@@ -12,14 +12,10 @@ interface ContaUsuarioComponentsProps {
   setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement | null>>
 }
 
-interface LoginInfo { password: string, username: string }
-
 const ContaUsuarioComponent = ({
   anchorEl,
   setAnchorEl,
 }: ContaUsuarioComponentsProps) => {
-  const cookiesUser = getCookie('LOGIN_INFO')
-  const user: LoginInfo = JSON.parse(cookiesUser ?? "")
 
   const open = Boolean(anchorEl)
 
@@ -74,7 +70,7 @@ const ContaUsuarioComponent = ({
       >
         <MenuItem sx={{ minWidth: '200px' }}>
           <Avatar className="!bg-grzprimary">U</Avatar>
-          <p className="text-sm">{user?.username}</p>
+          <p className="text-sm">Minha conta</p>
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>

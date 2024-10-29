@@ -1,7 +1,7 @@
 import {
   Box,
-  Grid,
   Drawer,
+  Grid2,
 } from '@mui/material'
 import React from 'react'
 import MenuSidebar from './menu-sidebar'
@@ -32,9 +32,9 @@ const SidebarComponent = ({ open, setOpen }: NavbarComponentProps) => {
         },
       }}
     >
-      <Grid className="flex items-center justify-center mt-5 mb-3">
+      <Grid2 className="flex items-center justify-center mt-5 mb-3">
         <Image src={logo} alt="grazziotin" width={130} height={130} priority />
-      </Grid>
+      </Grid2>
       <Box
         sx={{
           width: 330,
