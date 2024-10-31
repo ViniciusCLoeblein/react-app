@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  webpack: (config) => {
+    config.cache = false;
+    return config;
+  },
+  
+  reactStrictMode: true,
+  images: {
+    domains: ['*'], 
+  },
 };
 
 export default nextConfig;

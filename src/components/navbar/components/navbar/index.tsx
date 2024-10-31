@@ -35,7 +35,7 @@ const NavbarComponent = ({ open, setOpen }: NavbarComponentProps) => {
             id="navbar-logo"
             className="w-32 h-14 flex justify-center text-center"
           >
-             <p className='font-bold text-2xl flex justify-center text-center'>UPF</p>
+             <p className='pt-3 text-lg font-semibold'>UPF</p>
           </button>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton

@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/navbar";
 import { getDog } from "@/service/doguinho";
-import { ImageList, ImageListItem } from "@mui/material";
 import Image from "next/image";
 import { memo } from "react";
 import { useQuery } from "react-query";
@@ -46,11 +45,7 @@ const Doguinho = () => {
         </div>
       </div>
       <div className="flex justify-center mt-6 items-center content-center">
-        <ImageList sx={{ width: 500, height: 450 }} cols={1} rowHeight={164}>
-          <ImageListItem>
-            {renderContent()}
-          </ImageListItem>
-        </ImageList>
+        {renderContent()}
       </div>
     </>
   );

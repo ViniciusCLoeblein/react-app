@@ -1,33 +1,32 @@
-import React, { memo } from "react"
 import { useRouter } from "next/navigation"
-import { List, ListItemButton, ListItemText } from "@mui/material"
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material"
 
 
-const MenuSidebar:React.FC = () => {
-const router = useRouter()
+const MenuSidebar: React.FC = () => {
+  const router = useRouter()
 
   return (
-    <List component="div" className="!bg-grzsecondary" disablePadding>
-      <ListItemButton
-        onClick={() =>
-          router.push('/doguinho')
-        }
-      >
-        <ListItemText>
-          <p className="text-[13.5px] text-white">Imagem doguinho</p>
-        </ListItemText>
-      </ListItemButton>
-      <ListItemButton
-        onClick={() =>
-          router.push('/comidas')
-        }
-      >
-        <ListItemText>
-          <p className="text-[13.5px] text-white">Comidas</p>
-        </ListItemText>
-      </ListItemButton>
+    <List disablePadding >
+      <ListItem disablePadding>
+        <ListItemButton className="!h-[45px] justify-center flex items-center"
+          onClick={() => router.push('/doguinho')}
+        >
+          <ListItemText className="flex items-center">
+            <p className="text-[13.55px] text-white !flex !w-full !pt-3">Imagem doguinho</p>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
+      <ListItem disablePadding>
+        <ListItemButton className="!h-[45px] !w-full justify-center flex items-center"
+          onClick={() => router.push('/comidas')}
+        >
+          <ListItemText className="flex items-center">
+            <p className="text-[13.55px] text-white !flex !w-full !pt-3">Comidas</p>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
     </List>
   )
 }
 
-export default memo(MenuSidebar)
+export default MenuSidebar

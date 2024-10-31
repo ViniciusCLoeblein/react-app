@@ -1,9 +1,7 @@
 import {
-  Box,
   Drawer,
-  Grid2,
+  Grid,
 } from '@mui/material'
-import React from 'react'
 import MenuSidebar from './menu-sidebar'
 import logo from '../..//../../assets/logo.png'
 import Image from 'next/image'
@@ -27,25 +25,16 @@ const SidebarComponent = ({ open, setOpen }: NavbarComponentProps) => {
           width: 330,
           borderRadius: '0px 30px 30px 0px',
           boxSizing: 'border-box',
-          background: 'repeating-linear-gradient(#047857, #047857, #059669)',
+          background: '#047857',
           position: 'relative',
         },
       }}
     >
-      <Grid2 className="flex items-center justify-center mt-5 mb-3">
+      <Grid className="flex items-center justify-center mt-5 mb-3">
         <Image src={logo} alt="grazziotin" width={130} height={130} priority />
-      </Grid2>
-      <Box
-        sx={{
-          width: 330,
-          overflow: 'auto',
-          position: 'relative',
-        }}
-      >
-        <MenuSidebar />
-      </Box>
+      </Grid>
+      <MenuSidebar />
     </Drawer>
   )
 }
-
-export default React.memo(SidebarComponent)
+export default SidebarComponent
